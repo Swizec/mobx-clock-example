@@ -4,3 +4,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 An approach for integrating time into your React app. Using MobX, but
 the same principle should work with Redux.
+
+![Counting clocks gif](/clock-example.gif?raw=true "Counting clocks gif")

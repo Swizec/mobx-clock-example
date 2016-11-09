@@ -1,8 +1,7 @@
 
 import React from 'react';
 import moment from 'moment';
-
-const now = moment();
+import { inject, observer } from 'mobx-react';
 
 const Duration = ({ d }) => {
     let h = d.hours(),
@@ -14,31 +13,31 @@ const Duration = ({ d }) => {
     return <code>{h}:{m}:{s}</code>;
 };
 
-const TimeUntil = ({ until }) => {
-    const duration = moment.duration(until.diff(now));
+const TimeUntil = inject('Clock')(observer(({ until, Clock }) => {
+    const duration = moment.duration(until.diff(Clock.time));
 
     return (
         <div>
             {until.calendar()} comes in <Duration d={duration} />
         </div>
     );
-};
+}));
 
-const TimeSince = ({ since }) => {
-    const duration = moment.duration(now.diff(since));
+const TimeSince = inject('Clock')(observer(({ since, Clock }) => {
+    const duration = moment.duration(Clock.time.diff(since));
 
     return (
         <div>
             {since.calendar()} was <Duration d={duration} /> ago
         </div>
     );
-};
+}));
 
-const CurrentTime = () => (
+const CurrentTime = inject('Clock')(observer(({ Clock }) => (
     <div>
-        Current Time: <Duration d={now} />
+        Current Time: <Duration d={Clock.time} />
     </div>
-);
+)));
 
 const Time = ({ until, since }) => {
     if (until) {
