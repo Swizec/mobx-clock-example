@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Provider } from 'mobx-react';
+import DevTools from 'mobx-react-devtools';
 
 import './App.css';
 
@@ -13,6 +14,7 @@ class App extends Component {
       return (
           <Provider Clock={Clock}>
               <div className="App">
+                  <DevTools />
                   <div className="App-intro">
                       <Time until={moment().add(10, 'minutes')} />
                       <Time since={moment().subtract(5, 'minutes')} />
